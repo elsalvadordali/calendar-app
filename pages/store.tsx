@@ -1,24 +1,34 @@
 import { combineReducers, StoreEnhancer } from '@reduxjs/toolkit'
-import { configureStore } from '@reduxjs/toolkit'
+import { createStore } from 'redux'
 import Calendar from './calendar/caledar_utils'
 
-type ConfigureEnhancersCallback = (
-  defaultEnhancers: StoreEnhancer[]
-) => StoreEnhancer[]
+let now = new Date()
 
-const currentDateReducer = date => {
-  return 'hi'
-}
+//STORE
 
-const datesReducer = () => {
-  //let cal = new Calendar()
-  //return new Date()
-  return 'hi'
-}
+//ACTIONS
+const REPLACE_CLASS = 'REPLACE_CLASS'
 
-export const store = configureStore({
-  reducer: {
-    currentDate: currentDateReducer,
-    dates: datesReducer
+// ACTION CREATORS
+const updateClassListByReplacement = (toRemove, toAdd) => {
+  return {
+    type: 'REPLACE_CLASS',
+    toRemove,
+    toAdd
   }
-})
+}
+
+const replaceClass = (state, toRemove, toAdd) => {
+  return 'replace you'
+}
+
+//Reducer
+const designer = (state = [], action) => {
+  switch (action.type) {
+    case REPLACE_CLASS:
+      return replaceClass(state, toRemove, toAdd)
+  }
+}
+
+const store = createStore(designer)
+store.subscribe(() => console.log(store.getState()))
